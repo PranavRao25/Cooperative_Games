@@ -1,5 +1,25 @@
 from imports import *
 
+
+def chsh(angle):
+    epr = QuantumRegister(2, 'epr')
+    a = ClassicalRegister(2, 'a')
+    chsh_circ = QuantumCircuit(epr, a)
+
+    # Entangled Pair
+    chsh_circ.append(bell(), epr)
+    chsh_circ.barrier()
+
+    # rotational gates
+    chsh_circ.p(angle, 0)
+
+    # measure
+    chsh_circ.measure(epr[0], a[0])
+    chsh_circ.measure(epr[1], a[1])
+
+    return chsh_circ
+
+
 def optimalCHSH():
     epr = QuantumRegister(2, 'epr')
     q = ClassicalRegister(2, 'q')
@@ -25,22 +45,3 @@ def optimalCHSH():
     chsh_circ.measure(epr, a)
 
     return chsh_circ
-
-
-def chsh(angle):
-    epr = QuantumRegister(2, 'epr')
-    a = ClassicalRegister(2, 'a')
-    chsh = QuantumCircuit(epr, a)
-
-    # Entangled Pair
-    chsh.append(bell(), epr)
-    chsh.barrier()
-
-    # rotational gates
-    chsh.p(angle, 0)
-
-    # measure
-    chsh.measure(epr[0], a[0])
-    chsh.measure(epr[1], a[1])
-
-    return chsh

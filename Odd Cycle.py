@@ -1,5 +1,6 @@
 from imports import *
 
+
 def oddCycle(n, qa, qb):
     if n % 2 == 0:
         raise (ValueError('even number'))
